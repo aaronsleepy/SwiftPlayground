@@ -1,7 +1,24 @@
 //: [Previous](@previous)
 
 import Foundation
+import Combine
 
-var greeting = "Hello, playground"
+final class SomeViewModel {
+    @Published var name: String = "Jack"
+    var age: Int = 20
+}
 
-//: [Next](@next)
+final class Label {
+    var text: String = "Empty"
+}
+
+let label = Label()
+let viewModel = SomeViewModel()
+
+print(">>> text: \(label.text)")
+    
+viewModel.$name.assign(to: \.text, on: label)
+print(">>> text: \(label.text)")
+
+viewModel.name = "Aaron"
+print(">>> text: \(label.text)")

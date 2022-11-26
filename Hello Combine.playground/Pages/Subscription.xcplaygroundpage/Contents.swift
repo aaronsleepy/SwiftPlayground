@@ -1,7 +1,20 @@
 //: [Previous](@previous)
 
 import Foundation
+import Combine
 
-var greeting = "Hello, playground"
+let subject = PassthroughSubject<String, Never>()
 
-//: [Next](@next)
+
+let subscription = subject
+    .print("[Debug]")
+    .sink { value in
+    print(">>> Subscriber received value: \(value)")
+}
+
+subject.send("Hello")
+subject.send("Hello again!")
+subject.send("Hello for the last time!")
+subject.send(completion: .finished) // <-- Publisher가 종료 이벤트 전송
+//subscription.cancel() // Subscriber가 종료 요청
+subject.send("Hello ?? :(")
