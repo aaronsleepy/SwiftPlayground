@@ -1,7 +1,6 @@
 //: [Previous](@previous)
 
 import Foundation
+import Comine
 
-var greeting = "Hello, playground"
 
-//: [Next](@next)
