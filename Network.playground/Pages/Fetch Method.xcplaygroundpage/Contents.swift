@@ -24,6 +24,9 @@ struct GithubProfile: Codable {
     }
 }
 
+/**
+ 네트워크를 담당할 Service
+ */
 final class NetworkService {
     let session: URLSession
     
@@ -62,3 +65,4 @@ final class NetworkService {
         task.resume()
     }
 }
+
