@@ -40,3 +40,8 @@ numbers
 /**
  prefix
  */
+let tens = (1...10).publisher
+tens
+    .prefix(2)
+    .sink(receiveCompletion: { print("Completed with: \($0)")}, receiveValue: { print($0) })
+    .store(in: &subscriptions)
