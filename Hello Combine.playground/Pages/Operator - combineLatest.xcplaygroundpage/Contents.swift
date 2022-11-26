@@ -48,6 +48,11 @@ passwordPublisher.send("weak")
 passwordPublisher.send("1234567890123")
 
 
-// Merge
+// Merge: Output 타입이 같은 경우
+let publisher1 = [1, 2, 3, 4, 5].publisher
+let publisher2 = [300, 400, 500].publisher
 
-
+let mergedPublisherSusbscription = publisher1.merge(with: publisher2)
+    .sink { value in
+        print(">>> Merge: sugscription received value: \(value)")
+    }
