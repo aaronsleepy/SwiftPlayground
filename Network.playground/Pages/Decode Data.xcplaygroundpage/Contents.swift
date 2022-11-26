@@ -9,7 +9,7 @@ struct GithubProfile: Codable {
     
     enum CodingKeys: String, CodingKey {
         case login
-        case avatarUrl = "avatr_url"
+        case avatarUrl = "avatar_url"
         case htmlUrl = "html_url"
         case followers
         case following
@@ -29,8 +29,13 @@ let task = session.dataTask(with: url) { data, response, error in
     
     guard let data = data else { return }
     
-    let result = String(data: data, encoding: .utf8)
-    print(result)
+    do {
+        let decoder = JSONDecoder()
+        let profile = try decoder.decode(GithubProfile.self, from: data)
+        print("profile: \(profile)")
+    } catch let error as NSError {
+        print("error: \(error)")
+    }
 }
 
 task.resume()
