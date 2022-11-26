@@ -4,7 +4,7 @@ import Foundation
 import Combine
 
 /**
- 2개의 Publisher로부터 동시에 받고 싶을 때
+ 2개의 Publisher로부터 동시에 받아서 합치고 싶을 때
  */
 
 // Basic CombineLatest
@@ -30,6 +30,22 @@ numPublisher.send(4)
 
 
 // Advanced CombineLatest
+// Ex: username과 password가 입력될 때 동시에 validation check 하기
+let usernamePublisher = PassthroughSubject<String, Never>()
+let passwordPublisher = PassthroughSubject<String, Never>()
+
+let validateCredentialsSubscription = usernamePublisher.combineLatest(passwordPublisher)
+    .map { (username, password) -> Bool in
+        return !username.isEmpty && !password.isEmpty && password.count > 12
+    }
+    .sink { valid in
+        print(">>> Credential valid?: \(valid)")
+    }
+
+usernamePublisher.send("jasonlee")
+passwordPublisher.send("")
+passwordPublisher.send("weak")
+passwordPublisher.send("1234567890123")
 
 
 // Merge
