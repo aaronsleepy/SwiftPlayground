@@ -56,3 +56,14 @@ final class NetworkService {
         return publisher
     }
 }
+
+let networkService = NetworkService(configuration: .default)
+let subscription = networkService.fetchProfile(userName: "aaronsleepy")
+    .receive(on: RunLoop.main)
+    .print("[Debug]")
+    .sink { completion in
+        print("Completion: \(completion)")
+    } receiveValue: { profile in
+        print("Profile: \(profile)")
+    }
+
