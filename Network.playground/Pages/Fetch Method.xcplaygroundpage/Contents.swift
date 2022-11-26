@@ -66,3 +66,12 @@ final class NetworkService {
     }
 }
 
+let networkService = NetworkService(configuration: .default)
+networkService.fetchProfile(userName: "aaronsleepy") { result in
+    switch result {
+    case .success(let profile):
+        print(">>> Profile: \(profile)")
+    case .failure(let error):
+        print(">>> Error: \(error)")
+    }
+}
