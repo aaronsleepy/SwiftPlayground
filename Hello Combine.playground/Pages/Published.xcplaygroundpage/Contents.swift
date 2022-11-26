@@ -7,7 +7,7 @@ let subject = PassthroughSubject<String, Never>()
 
 
 let subscription = subject
-    .print()
+    .print("[Debug]")
     .sink { value in
     print(">>> Subscriber received value: \(value)")
 }
