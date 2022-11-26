@@ -6,8 +6,10 @@ import Combine
 let subject = PassthroughSubject<String, Never>()
 
 
-let subscription = subject.sink { value in
-    print("Subscriber received value: \(value)")
+let subscription = subject
+    .print()
+    .sink { value in
+    print(">>> Subscriber received value: \(value)")
 }
 
 subject.send("Hello")
